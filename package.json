@@ -1,0 +1,17 @@
+{
+  "name": "reCAPTCHA-client-server",
+  "version": "1.0.0",
+  "main": "server.js ",
+  "author": "Mohammed Farmaan",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "node-fetch": "2.6.1",
+    "nodemon": "^2.0.20",
+    "request": "^2.88.2"
+  }
+}

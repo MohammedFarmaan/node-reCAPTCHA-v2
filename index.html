@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <title>News Letter</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>subscribe to our mail</h1>
+      <form id="subscribe-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" class="form-control" />
+        </div>
+        <div class="form-group">
+          <div
+            class="g-recaptcha"
+            data-sitekey="6LfzlA4iAAAAAMNUvoPDmfua3x-l-Wl_4zb1xwLN"
+          ></div>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary" />
+      </form>
+      <script>
+        document
+          .getElementById("subscribe-form")
+          .addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = document.querySelector("#name").value;
+            const email = document.querySelector("#email").value;
+            const captcha = document.querySelector(
+              "#g-recaptcha-response"
+            ).value;
+
+            return fetch("subscribe", {
+              method: "POST",
+              headers: {
+                "Content-type": "application/json",
+                mode: "no-cors",
+              },
+              body: JSON.stringify({ name, email, captcha }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                alert(data.msg);
+                if (data.success) return location.reload();
+              });
+          });
+      </script>
+    </div>
+  </body>
+</html>
